@@ -153,6 +153,74 @@ function Intro({ onStart }: { onStart: () => void }) {
   );
 }
 
+const COMIDA = [
+  { e: "🥣", t: "Su croquetita", hot: true },
+  { e: "🍗", t: "Pollo cocido", hot: true },
+  { e: "🍚", t: "Su comidita", hot: false },
+  { e: "🍞", t: "Pan de muerto", hot: false },
+  { e: "💧", t: "Aguita fresca", hot: false },
+];
+
+const PREMIOS = [
+  { e: "🍪", t: "Galletitas", hot: false },
+  { e: "🧀", t: "Quesito", hot: false },
+  { e: "🥓", t: "Premiotitos", hot: false },
+  { e: "🍎", t: "Manzanita", hot: false },
+  { e: "🍌", t: "Platanito", hot: false },
+];
+
+function OfferingPanel({
+  title,
+  note,
+  items,
+  className,
+}: {
+  title: string;
+  note: string;
+  items: { e: string; t: string; hot: boolean }[];
+  className: string;
+}) {
+  return (
+    <div className={`rounded-2xl border-4 px-5 py-6 ${className}`}>
+      <h3 className="hover-grow mx-auto w-fit font-display text-3xl text-foreground">{title}</h3>
+      <p className="mt-1 text-center text-sm text-muted-foreground">{note}</p>
+      <div className="mt-5 flex flex-wrap items-end justify-center gap-4">
+        {items.map((it) => (
+          <div key={it.t} className="hover-grow group flex w-24 flex-col items-center">
+            <div className="relative flex h-16 w-16 items-center justify-center rounded-full border-2 border-marigold/70 bg-background/50">
+              {it.hot && (
+                <>
+                  <span className="steam absolute -top-2 left-1/2 h-6 w-1.5 rounded-full bg-foreground/40" />
+                  <span className="steam absolute -top-2 left-1/2 h-6 w-1.5 rounded-full bg-foreground/30" style={{ animationDelay: "1.2s" }} />
+                </>
+              )}
+              <span className="wiggle text-4xl">{it.e}</span>
+            </div>
+            <span className="mt-2 text-center text-xs font-bold text-muted-foreground">{it.t}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FoodOffering() {
+  return (
+    <section className="rise relative mx-auto mt-16 max-w-4xl px-4" style={{ animationDelay: ".45s" }}>
+      <h2 className="hover-grow mx-auto w-fit text-center font-display text-4xl text-marigold sm:text-5xl">
+        Su comida y sus premios
+      </h2>
+      <p className="mx-auto mt-3 max-w-md text-center text-muted-foreground">
+        Todo lo que hacía mover su colita, bien cerquita para cuando llegue.
+      </p>
+      <div className="mt-8 grid gap-6 sm:grid-cols-2">
+        <OfferingPanel title="Comida" note="Pausita, que ya llegó" items={COMIDA} className="border-marigold bg-violet" />
+        <OfferingPanel title="Premios" note="Uno más... y uno más" items={PREMIOS} className="border-rosa bg-secondary" />
+      </div>
+    </section>
+  );
+}
+
 function Index() {
   const [started, setStarted] = useState(false);
 
@@ -226,6 +294,8 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <FoodOffering />
 
       {/* huellitas llegando */}
       <section className="mt-12 text-center">

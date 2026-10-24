@@ -123,3 +123,18 @@
 .paw-step { animation: paw-appear 6s ease-in-out infinite; }
 .nose-pulse { animation: pulse-nose 1.6s ease-in-out infinite; }
 .rise { animation: rise 1s ease-out both; }
+
+@keyframes steam {
+  0% { opacity: 0; transform: translate(-50%, 6px) scaleX(.8); }
+  30% { opacity: .55; }
+  100% { opacity: 0; transform: translate(-50%, -26px) scaleX(1.4); }
+}
+@keyframes taste {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-7deg); }
+  75% { transform: rotate(7deg); }
+}
+.steam { animation: steam 2.8s ease-out infinite; }
+.wiggle { animation: taste .7s ease-in-out infinite; animation-play-state: paused; }
+.group:hover .wiggle { animation-play-state: running; }
+
